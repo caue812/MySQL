@@ -88,3 +88,8 @@ UPDATE cursos SET
 
 -- Consultar os cursos que não tem definido o link
 SELECT id, nome, link FROM cursos WHERE link IS NULL;
+
+
+
+
+
