@@ -32,3 +32,4 @@
 
 -- Inserir uma professora chamada 'Mariana Ribeiro' com:
 -- id 4, cpf '159.753.486-22', salario 5800.25, data_admissao '2019-05-20', disciplina 'Química'
+

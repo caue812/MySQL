@@ -215,16 +215,81 @@ SELECT CONCAT(
 ) AS 'Mensagem'
 FROM alunos;
 
--- Consular
 -- Consultar AND 
+-- Consultar os alunos que nasceram na mês de janeiro até junho
+SELECT
+	nome,
+    MONTH(data_nascimento)
+    FROM alunos
+    WHERE MONTH(data_nascimento) >= 1 AND MONTH(data_nascimento) <= 6
+    ORDER BY MONTH(data_nascimento) ASC;
+-- Consultar os alunos que tem a nota inferior 7 em todas as notas
+-- Consultar: nome, nota 1, nota2 e nota 3 <7
+-- Filtro: nota 1, nota 2 e nota 3 < 7 
+SELECT 
+	nome,
+    nota1,
+    nota2,
+    nota3,
+    FORMAT((nota1 + nota2 + nota3) / 3, 2) AS 'Média'
+    FROM alunos
+    WHERE nota1 < 7 AND nota2 < 7 AND nota3 < 7;
+    
 -- Consultar OR
--- Consultar nome exato
--- Consultar nome começa com 
+-- Consultar os alunos das disciplinas 
+--     'Educação Física', 'Arte' ou 'português'
+SELECT
+	nome, disciplinas
+    FROM alunos
+    WHERE disciplinas = 'Educação Física' OR disciplinas = 'Português' OR disciplinas = 'Arte'
+    ORDER BY disciplinas ASC, nome ASC;
+    
+-- Consultar nome exato 'Silva'
+select nome from alunos where nome = 'Silva'; -- Não encontra nenhum, pois não existe um aluno chamado somente 'Silva'
+
+-- Consultar nome começa com 'Silva'
+select nome from alunos where nome like 'Silva%'; -- Todos os registros que começam com 'Silva'
+
 -- Consultar nome termina com
+select nome from alunos where nome like '%Silva'; -- Todos os registros que terminam com 'Silva'
+
 -- Consultar nome contém em qualquer parte
--- Consultar a data de nascimento formatada
+select nome from alunos where nome like '%Silva%'; -- Todos os registros que contém 'Silva' no começo, meio ou fim.
+
+
+-- Consultar a data de nascimento formatada (dd/mm/aaaa)
+select nome, date_format(data_nascimento, '%d/%m/%Y') from alunos;
+
 -- Consultar os alunos limitando a quantidade
+select id, nome from alunos limit 15;
 -- Consultar os alunos apresentando a primeira página
+select id, nome from alunos limit 0, 15; -- primeiro qual o registro que ele irá pegar, segundo é a quantidade
 -- Consultar os alunos apresentando a segunda página
+select id, nome from alunos limit 15, 15;
+-- Consultar os alunos apresentando a terceira página
+select id, nome from alunos limit 30, 15;
+-- Consultar os alunos apresentando a quarta página
+select id, nome from alunos limit 45, 15;
+
+-- Criar uma tabela
+drop table if exists formacoes;
+-- PRIMARY KEY (PK): chave primária é um indentificador único dos registros dessa tabela 
+-- auto_increment: gera id automaticamente 
+-- not null: faz com que a coluna seja obrigatória 
+-- unique: faz com que tenha somente um registro com aquela coluna
+create table formacoes(
+     id int primary key auto_increment,
+     nome varchar(100) not null unifique
+);
+insert into formacoes (nome) values ('SuperDev');
+insert into formacoes (nome) values ('Adas');
+-- O insert abaixo não funciona pois já temos uma formação com o nome 'Adas'
+-- insert into formacoes (nome) values ('Adas');
+-- O insert abaixo não funciona pois o nome não pode ser nulo
+-- insert into formacoes (nome) values ('null');
+select id, nome from formacoes order by id asc;
+
+
+
 
 
