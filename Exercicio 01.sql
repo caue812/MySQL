@@ -279,7 +279,7 @@ drop table if exists formacoes;
 -- unique: faz com que tenha somente um registro com aquela coluna
 create table formacoes(
      id int primary key auto_increment,
-     nome varchar(100) not null unifique
+     nome varchar(100) not null unique
 );
 insert into formacoes (nome) values ('SuperDev');
 insert into formacoes (nome) values ('Adas');
