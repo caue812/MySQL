@@ -10,7 +10,7 @@ inner join livros on (livros_comentarios.id_livro = livros.id)
 group by livros_comentarios.id_livro
 order by quantidade_comentarios desc, livro asc;
 
-select * from vw_livros_comentarios_consolidados vlcc;
+select * from vw_livros_comentarios_consolidados;
 
 
 
@@ -29,9 +29,13 @@ select * from vw_livros_autores;
      
 
 -- Criar uma view vw_livros_categorias (listar nome da categoria, nome do livro, id da categoria e id do livro)
-
-    
-   
+select
+	livros.categorias as 'categoria',
+	livros.nome as 'livro',
+	categorias.id as 'id_categoria',
+	livros.id as 'id_livro'
+	from livros 
+	inner join categorias on (livros.id_categoria = categorias.id);
 
 -- Criar uma view vw_livros_editoras (listar nome da editora, nome do livro, ordenados por nome de editora)
 -- Criar uma view vw_livros_editoras_autores 
